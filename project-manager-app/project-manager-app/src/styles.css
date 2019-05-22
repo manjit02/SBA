@@ -1,0 +1,174 @@
+/* You can add global styles to this file, and also import other style files */
+/* Navigation Link Styles */
+nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: rgb(121, 115, 115);
+    background-repeat: repeat-x;
+    border-radius: 4px;
+}
+nav a:visited, a:link {
+  color: #ffffff;
+}
+nav a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+}
+nav a:active {
+    color: #039be5;
+}
+nav li {
+    display: inline;
+    padding-right: 30px;
+}
+/* items class */
+.items {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding-left: 0;
+    width: 10em;
+  }
+  .items li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em;
+    height: 1.6em;
+    border-radius: 4px;
+  }
+  .items li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+  }
+  .items li.selected:hover {
+    background-color: #BBD8DC;
+    color: white;
+  }
+  
+  .items .text {
+    position: relative;
+    top: -3px;
+  }
+  
+  .items .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #607D8B;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+  }
+  .items li.selected {
+    background-color: #CFD8DC;
+    color: white;
+  }
+
+  h1 {
+    color: #369; 
+    font-family: Arial, Helvetica, sans-serif;   
+    font-size: 150%;
+  }
+  h2{ 
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;   
+    font-weight: lighter;
+    font-size: 150%;
+  }
+  h3 { 
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;   
+    font-weight: lighter;
+    font-size: 100%;
+  }
+  body { 
+    margin: 2em; 
+  }
+  body, input[text], button { 
+    color: #888; 
+    font-family: Cambria, Georgia; 
+  }
+  a {
+    cursor: pointer;
+    cursor: hand;
+  }
+  button {
+    font-family: Arial;
+    color: #ffffff;
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+  }
+  button:hover {
+    background-color: #cfd8dc;
+  }
+  button:disabled {
+    background-color: #eee;
+    color: #aaa; 
+    cursor: auto;
+  }
+  table, th, td {
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px;
+  }
+  table tr:nth-child(odd){
+      background-color: #f1f1f1;
+  }
+  table tr:nth-child(even) {
+      background-color: #ffffff;
+  }
+  .btn {
+      display: inlline-block;
+      padding: 4px 12px;
+      margin-bottom: 0;
+      font-size: 12px;
+      line-height: 20px;
+      vertical-align: middle;
+      cursor: pointer;
+      border: 1px solid #cccccc;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05)
+  }
+  .btn-primary {
+      color: #ffffff;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      background-color: #006dcc;
+      background-repeat: repeat-x;
+      border-color: rgba(0, 0, 0, 0.01) rgba(0, 0, 0, 0.01) rgba(0, 0, 0, 0.25);
+  }
+  .top-buffer {
+      margin-top: 10px;
+  }
+  .foo
+  {
+      padding-right: 10px;
+      width: 125px;
+  }
+  .form-min-control {
+    display: inline;
+    width: 20%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}

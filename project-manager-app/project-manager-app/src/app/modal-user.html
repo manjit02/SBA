@@ -1,0 +1,27 @@
+<ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Available Users</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="userTitle">Select User</label>
+              <div class="input-group">
+                <select id="user" class="form-control" name="user" [(ngModel)]="seletectedUserId" > 
+                  <option *ngFor="let usr of users" [value]="usr.userId">
+                        {{usr.firstName}} {{usr.lastName}}
+                    </option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); sendMessage()">Apply</button>
+        </div>
+      </ng-template>
+      <a class="btn btn-lg btn-outline-primary"  (click)="open(content)">Search</a>
+      <hr>

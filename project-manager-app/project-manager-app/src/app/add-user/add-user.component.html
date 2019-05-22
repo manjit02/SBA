@@ -1,0 +1,52 @@
+<div class="container">
+    <div>
+      <div class="form-group;row top-buffer" *ngIf="!showEdit"><h2>Add User</h2></div> 
+      <div class="form-group;row top-buffer" *ngIf="showEdit"><h2>Edit User</h2></div> 
+      <form [formGroup]="useraddform" (ngSubmit)="addUser()" novalidate> 
+        <div *ngIf="validMessage != ''" class="row top-buffer">
+          <h3 class="has-info">{{validMessage}}</h3>
+        </div>   
+        <div>  
+          <div class="form-group;row top-buffer">
+              <label>First Name</label>
+              <input type="text" class="form-control" formControlName="firstName" required/>
+          </div>      
+          <div class="form-group;row top-buffer">
+              <label>Last Name</label>
+              <input type="text"  class="form-control" formControlName="lastName" required/>
+          </div>
+          <div>
+            <div *ngIf="!showEdit">
+              <button type="submit" class="btn btn-primary;row top-buffer" [disabled]="!useraddform.valid">Add</button>
+              &nbsp; <a  class="btn btn-primary" style="margin-top: 20px;" (click)="resetForm()">Reset</a>
+            </div>
+            <div *ngIf="showEdit">
+                <button type="submit" class="btn btn-primary;row top-buffer" [disabled]="!useraddform.valid">Save</button>
+                &nbsp;<a  class="btn btn-primary" style="margin-top: 20px;" (click)="resetForm()">Reset</a>
+            </div>
+          </div>
+      </div> 
+      </form>
+      <div>  
+          <h2>User List</h2>
+          <input type="text" class="foo" [(ngModel)]="searchTerm" placeholder="Search..."/>&nbsp;&nbsp;
+          <label>Sort User By </label>&nbsp;&nbsp;
+          <a  class="btn " (click)="firstNameSort()">First Name</a>&nbsp;&nbsp;
+          <a  class="btn " (click)="lastNameSort()">Last Name</a>
+          <table>
+              <thead>
+                    <td><b>First Name</b></td>
+                    <td><b>Last Name</b></td>
+                    <td></td>
+                    <td></td>
+                </thead>
+                 <tr *ngFor="let user of users | userFilter : searchTerm">
+                   <td>{{user.firstName}}</td>
+                   <td>{{user.lastName}}</td>
+                   <td ><button  class="btn btn-primary" (click)="editUser(user.userId)">Edit</button></td>
+                   <td ><button  class="btn btn-primary" (click)="deleteUser(user.userId)">Delete</button></td>
+                 </tr>
+          </table>
+          </div>
+    </div>
+  </div>

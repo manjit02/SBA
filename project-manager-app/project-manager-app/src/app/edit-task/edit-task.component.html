@@ -1,0 +1,36 @@
+<div class="container"> 
+    <div>        
+      <form [formGroup]="taskeditform" (ngSubmit)="updateTask()" ngNativeValidate>   
+        <div *ngIf="validMessage != ''" class="row top-buffer">
+          <h3 class="has-info">{{validMessage}}</h3>
+        </div>     
+        <h2>Edit Task</h2>
+        <div class="form-group;row top-buffer">
+          <label>Priority</label>
+          <input type="range" min="0" max="30" class="form-control" formControlName="priority" required/>
+        </div>
+        <div class="form-group;row top-buffer" *ngIf="!parentVisble">
+          <label>Parent Task</label>
+          <input type="text" class="form-control" formControlName="parentTaskTitle" required [attr.disabled]="true"/>
+          <ngbd-modal-parent (messageEvent)="receiveMessage($event)"></ngbd-modal-parent>
+        </div>   
+        <div class="form-group;row top-buffer">
+          <label>Task Title</label>
+          <input type="text" class="form-control" formControlName="title" required/>
+        </div>
+        <div class="form-group;row top-buffer">
+          <label>Start Date</label>
+          <input type="date"  class="form-control" formControlName="startDate" [attr.disabled]="true"/>
+        </div>
+        <div class="form-group;row top-buffer">
+          <label>End Date</label>
+          <input type="date"  class="form-control" formControlName="endDate" />
+        </div>
+        <div>
+          <div>
+            <button type="submit" class="btn btn-primary;row top-buffer" >Update</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

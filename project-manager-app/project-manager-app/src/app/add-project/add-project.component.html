@@ -1,0 +1,103 @@
+<div class="container">
+  <div>
+    <div class="form-group;row top-buffer" *ngIf="!showEdit">
+      <h2>Add Project</h2>
+    </div>
+    <div class="form-group;row top-buffer" *ngIf="showEdit">
+      <h2>Edit Project</h2>
+    </div>
+    <form [formGroup]="projectaddform" (ngSubmit)="addProject()" ngNativeValidate>
+      <div *ngIf="validMessage != ''" class="row top-buffer">
+          <h3 class="has-info" style="color:red">{{validMessage}}</h3>
+      </div>
+      <div class="form-group;row top-buffer">
+        <label>Project</label>&nbsp;
+        <input type="text" class="form-control" formControlName="title" required/>
+      </div>
+      <div class="form-group;row top-buffer">
+        <input *ngIf="!showEdit" type="checkbox" name="parent" formControlName="setDateCheck" value="1">
+        <label *ngIf="!showEdit">Set Start and End Date</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <div *ngIf="projectaddform.controls['setDateCheck'].value==0">
+          <label>Start Date</label>
+          <input type="text" style="background-color: #e9ecef;opacity: 1;" class="form-min-control" [attr.disabled]="true" /> &nbsp;&nbsp;
+          <label>End Date</label>
+          <input type="text" style="background-color: #e9ecef;opacity: 1;" class="form-min-control" [attr.disabled]="true" />
+        </div>
+        <div *ngIf="projectaddform.controls['setDateCheck'].value==1">
+          <label>Start Date</label>
+          <input type="date" class="form-control" formControlName="startDate" required />&nbsp;&nbsp;
+          <label>End Date</label>
+          <input type="date" class="form-control" formControlName="endDate" />
+        </div>
+      </div>
+      <div class="form-group;row top-buffer">
+        <label>Priority</label>
+        <input type="range" min="0" max="30" class="form-control" formControlName="priority" required/>
+      </div>
+      <div class="form-group;row top-buffer">
+        <label>Manager</label>&nbsp;
+        <input type="text" class="form-control" [attr.disabled]="true" formControlName="userName" required/>
+        <ngbd-modal-user (messageEvent)="receiveUserMessage($event)"></ngbd-modal-user>
+      </div>
+      <div>
+        <div *ngIf="!showEdit">
+          <button type="submit" class="btn btn-primary;row top-buffer" [disabled]="!projectaddform.valid">Add</button>
+          &nbsp;
+          <a class="btn btn-primary" style="margin-top: 10px;" (click)="resetForm()">Reset</a>
+        </div>
+        <div *ngIf="showEdit">
+          <button type="submit" class="btn btn-primary;row top-buffer" [disabled]="!projectaddform.valid">Save</button>
+          &nbsp;
+          <a class="btn btn-primary" style="margin-top: 10px;" (click)="resetForm()">Reset</a>
+        </div>
+      </div>
+    </form>
+    <div>
+      <h2>Project List</h2>
+      <input type="text" class="foo" [(ngModel)]="searchTerm" placeholder="Search..." />&nbsp;&nbsp;
+      <label>Sort Project By </label>&nbsp;&nbsp;
+      <a class="btn " (click)="startDateSort()">Start Date</a>&nbsp;&nbsp;
+      <a class="btn " (click)="endDateSort()">End Date</a>&nbsp;&nbsp;
+      <a class="btn " (click)="prioritySort()">Priority</a>&nbsp;&nbsp;
+      <a class="btn " (click)="completedSort()">Completed</a>
+      <table>
+        <thead>
+          <td>
+            <b>Project</b>
+          </td>
+          <td>
+            <b>Number of Tasks</b>
+          </td>
+          <td>
+            <b>Completed</b>
+          </td>
+          <td>
+            <b>Start Date</b>
+          </td>
+          <td>
+            <b>End Date</b>
+          </td>
+          <td>
+            <b>Priority</b>
+          </td>
+          <td></td>
+          <td></td>
+        </thead>
+        <tr *ngFor="let project of projects | projectFilter : searchTerm">
+          <td>{{project.title}}</td>
+          <td>{{project.taskCount}}</td>
+          <td>{{project.taskCompletedCount}}</td>
+          <td>{{project.startDate}}</td>
+          <td>{{project.endDate}}</td>
+          <td>{{project.priority}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editProject(project)">Update</button>
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="suspendProject(project)">Suspend</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

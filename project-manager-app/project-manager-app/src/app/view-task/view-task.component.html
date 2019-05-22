@@ -1,0 +1,36 @@
+<br/><br/>
+<label>Filter By Project</label>&nbsp;
+<input type="text" class="foo" [(ngModel)]="searchTerm" disabled/>&nbsp;&nbsp;
+<ngbd-modal-basic (messageEvent)="receiveMessage($event)"></ngbd-modal-basic>
+<label>Sort Task By </label>&nbsp;&nbsp;
+<button  class="btn " (click)="prioritySort()">Priority</button>&nbsp;&nbsp;
+<button  class="btn " (click)="startDateSort()">Start Date</button>&nbsp;&nbsp;
+<button  class="btn " (click)="endDateSort()">End Date</button>
+<div>  
+<h2>Task List</h2>
+<table>
+    <thead>
+          <td>Task</td>
+          <td>Parent</td>
+          <td>Priority</td>
+          <td>Start Date</td>
+          <td>End Date</td>
+          <!--td>Is Parent</td-->
+          <td></td>
+          <td></td>
+      </thead>
+       <tr *ngFor="let task of tasks | taskFilter : searchTerm">
+         <td>{{task.title}}</td>
+         <td *ngIf="task.parentTask">{{task.parentTask.parentTask.title}}</td>
+         <td *ngIf="!task.parentTask">This task has no Parent</td>
+         <td>{{task.priority}}</td>
+         <td>{{task.startDate | date:"dd/MM/yyyy"}}</td>
+         <td>{{task.endDate | date:"dd/MM/yyyy"}}</td>
+         <!--td>{{task.parent}}</td-->
+         <td *ngIf="task.endDate"><a  class="btn disabled">Edit</a></td>
+         <td *ngIf="!task.endDate"><a class="btn btn-primary" [routerLink]="['/edittask',task.taskId]">Edit</a></td>
+         <td *ngIf="task.endDate"><a  class="btn disabled">End Task</a></td>
+         <td *ngIf="!task.endDate"><button  class="btn btn-primary" (click)="endTask(task.taskId)">End Task</button></td>
+       </tr>
+</table>
+</div>

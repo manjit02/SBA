@@ -1,0 +1,47 @@
+<div class="container">
+    <div>
+      <div class="form-group;row top-buffer"><h2>Add Task</h2></div>
+      
+      <form [formGroup]="taskaddform" (ngSubmit)="addTask()" ngNativeValidate> 
+        <div *ngIf="validMessage != ''" class="row top-buffer">
+          <h3 class="has-info">{{validMessage}}</h3>
+        </div>    
+        <div class="form-group;row top-buffer">
+            <label>Project</label>&nbsp;
+            <input type="text" class="form-control" [attr.disabled]="true" formControlName="projectTitle" required/>
+            <ngbd-modal-basic (messageEvent)="receiveMessage($event)"></ngbd-modal-basic>
+        </div> 
+        <div class="form-group;row top-buffer">
+            <label>Task</label>
+            <input type="text" class="form-control" formControlName="title" required/>
+        </div> 
+        <div class="form-group;row top-buffer">
+          <input type="checkbox" name="parent" formControlName="parentCheck" value="0">
+          <label>Parent Task</label>
+        </div>
+        <div class="form-group;row top-buffer">
+          <label>Priority</label>
+          <input type="range" min="0" max="30" class="form-control" formControlName="priority" required/>
+        </div>
+        <div class="form-group;row top-buffer" *ngIf="taskaddform.controls['parentCheck'].value==0">
+          <label>Parent Task</label>
+          <input type="text" class="form-control" [attr.disabled]="true" formControlName="parentTitle"/>
+          <ngbd-modal-parent (messageEvent)="receiveParentMessage($event)"></ngbd-modal-parent>
+        </div>       
+        <div class="form-group;row top-buffer">
+            <label>Start Date</label>
+            <input type="text"  class="form-control" [attr.disabled]="true" formControlName="startDate" />
+        </div>
+        <div class="form-group;row top-buffer">
+            <label>User</label>&nbsp;
+            <input type="text" class="form-control" [attr.disabled]="true" formControlName="userName" required/>
+            <ngbd-modal-user (messageEvent)="receiveUserMessage($event)"></ngbd-modal-user>
+        </div>
+        <div>
+          <div>
+            <button type="submit" class="btn btn-primary;row top-buffer" [disabled]="!taskaddform.valid">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
